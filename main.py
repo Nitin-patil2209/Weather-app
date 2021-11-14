@@ -6,9 +6,9 @@ from kivymd.uix.card import MDCard
 from kivymd.uix.textfield import MDTextField
 from kivy.lang import Builder
 from kivymd.uix.button import MDRectangleFlatButton
-
+from kivymd.uix.dialog import MDDialog
 PATH = "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-API = "api id"
+API = "2f90e3a992aebf5c57c2e7c116933ce6"
 import requests
 import math
 
@@ -157,20 +157,25 @@ class DemoApp(MDApp):
             "appid": API
         }
 
-        weath = requests.get("http://api.openweathermap.org/data/2.5/weather?", params=param)
-        response = weath.json()
-        self.root.get_screen("main").ids.greet.text =f"Greetings {self.KIII.get_screen('login').ids.nitin.text}"
-        tempindegree = math.floor(response['main']['temp'] - 273.15)
-        discription = response['weather'][0]['description']
-        windspeed = response['wind']['speed']
-        mainstate = response['weather'][0]['main']
-        self.root.get_screen("main").ids.temp.text = f"{tempindegree}°c"
-        self.root.get_screen("main").ids.des.text = f"Discription : {discription}"
-        self.root.get_screen("main").ids.state.text = f"Weather : {mainstate}"
-        self.root.get_screen("main").ids.wspeed.text = f"Wind speed : {windspeed}"
+        try:
+            weath = requests.get("http://api.openweathermap.org/data/2.5/weather?", params=param)
+            response = weath.json()
+            self.root.get_screen("main").ids.greet.text = f"Greetings {self.KIII.get_screen('login').ids.nitin.text}"
+            tempindegree = math.floor(response['main']['temp'] - 273.15)
+            discription = response['weather'][0]['description']
+            windspeed = response['wind']['speed']
+            mainstate = response['weather'][0]['main']
+            self.root.get_screen("main").ids.temp.text = f"{tempindegree}°c"
+            self.root.get_screen("main").ids.des.text = f"Discription : {discription}"
+            self.root.get_screen("main").ids.state.text = f"Weather : {mainstate}"
+            self.root.get_screen("main").ids.wspeed.text = f"Wind speed : {windspeed}"
 
-        self.KIII.get_screen("login").ids.Password.text
-        self.root.get_screen("main").ids.city.text = self.KIII.get_screen("login").ids.Password.text
+            self.KIII.get_screen("login").ids.Password.text
+            self.root.get_screen("main").ids.city.text = self.KIII.get_screen("login").ids.Password.text
+        except:
+            dia = MDDialog(text="Turn on internet"
+                          )
+            dia.open()
 
 
 
