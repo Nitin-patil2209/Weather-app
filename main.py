@@ -10,7 +10,7 @@ from kivymd.uix.dialog import MDDialog
 PATH = "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
 API = "2f90e3a992aebf5c57c2e7c116933ce6"
 import requests
-import math
+
 
 
 
@@ -161,7 +161,7 @@ class DemoApp(MDApp):
             weath = requests.get("http://api.openweathermap.org/data/2.5/weather?", params=param)
             response = weath.json()
             self.root.get_screen("main").ids.greet.text = f"Greetings {self.KIII.get_screen('login').ids.nitin.text}"
-            tempindegree = math.floor(response['main']['temp'] - 273.15)
+            tempindegree = int(response['main']['temp'] - 273.15)
             discription = response['weather'][0]['description']
             windspeed = response['wind']['speed']
             mainstate = response['weather'][0]['main']
