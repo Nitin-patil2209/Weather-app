@@ -8,7 +8,7 @@ from kivy.lang import Builder
 from kivymd.uix.button import MDRectangleFlatButton
 from kivymd.uix.dialog import MDDialog
 PATH = "api.openweathermap.org/data/2.5/weather?q={city name}&appid={API key}"
-API = "2f90e3a992aebf5c57c2e7c116933ce6"
+API = "your API id"
 import requests
 
 
